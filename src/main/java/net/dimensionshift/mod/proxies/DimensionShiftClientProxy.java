@@ -11,18 +11,14 @@ import net.dimensionshift.mod.tileentity.TileEntityInvisibleBlock;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
-import com.jadarstudios.developercapes.DevCapes;
-
-import cpw.mods.fml.client.registry.ClientRegistry;
 
 public class DimensionShiftClientProxy extends DimensionShiftCommonProxy {
 	TileEntitySpecialRenderer render;
 
 	@Override
 	public void registerProxies() {
-		DevCapes.getInstance().registerConfig("https://dl.dropboxusercontent.com/s/oczwy4mul74stsc/capes17.txt", "DimensionShift");
-
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBasicWire.class, new TileEntityRenderBasicWire());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGlassJar.class, new TileEntityRenderGlassJar());

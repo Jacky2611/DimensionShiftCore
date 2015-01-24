@@ -3,15 +3,20 @@ package net.dimensionshift.mod.tileentity;
 import net.dimensionshift.mod.block.BlockSimpleController;
 import net.dimensionshift.mod.energy.DimensionFuel;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerFurnace;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
+import net.minecraft.tileentity.TileEntityLockable;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntitySimpleController extends TileEntity implements ISidedInventory {
+public class TileEntitySimpleController extends TileEntityLockable implements ISidedInventory, IUpdatePlayerListBox {
 
 	private String localizedName;
 
@@ -46,7 +51,7 @@ public class TileEntitySimpleController extends TileEntity implements ISidedInve
 	public boolean activeLastTick = false;
 
 	@Override
-	public void updateEntity() {
+	public void update() {
 
 		// Will be set to true if anything has been done this round. Otherwise
 		// it will be false
@@ -78,7 +83,7 @@ public class TileEntitySimpleController extends TileEntity implements ISidedInve
 
 		// checking if status has changed
 		if (active != this.activeLastTick) {
-			BlockSimpleController.updateBlockType(active, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
+			BlockSimpleController.updateBlockType(active, this.worldObj, this.getPos());
 			this.activeLastTick = active;
 		}
 
@@ -89,15 +94,17 @@ public class TileEntitySimpleController extends TileEntity implements ISidedInve
 		return this.slots.length;
 	}
 
-	public boolean isInvNameLocalized() {
+	@Override
+	public boolean hasCustomName() {
 		return this.localizedName != null && this.localizedName.length() > 0;
 	}
 
-	public String getInvName() {
-		return this.isInvNameLocalized() ? this.localizedName : "container.simpleController";
+	@Override
+	public String getName() {
+		return this.hasCustomName() ? this.localizedName : "container.simpleController";
 	}
 
-	public void setGuiDisplayName(String displayName) {
+	public void setCustomInventoryName(String displayName) {
 		this.localizedName = displayName;
 
 	}
@@ -148,15 +155,6 @@ public class TileEntitySimpleController extends TileEntity implements ISidedInve
 		}
 	}
 
-	@Override
-	public String getInventoryName() {
-		return null;
-	}
-
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
 
 	@Override
 	public int getInventoryStackLimit() {
@@ -165,16 +163,16 @@ public class TileEntitySimpleController extends TileEntity implements ISidedInve
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.getPos()) != this ? false : player.getDistanceSq(this.getPos().getX() + 0.5D, this.getPos().getY() + 0.5D, this.getPos().getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
-	public void openInventory() {
+	public void openInventory(EntityPlayer playerIn) {
 
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory(EntityPlayer playerIn) {
 
 	}
 
@@ -213,7 +211,7 @@ public class TileEntitySimpleController extends TileEntity implements ISidedInve
 		}
 		nbt.setTag("Items", list);
 
-		if (this.isInvNameLocalized()) {
+		if (this.hasCustomName()) {
 			nbt.setString("CustomName", this.localizedName);
 		}
 		nbt.setBoolean("ActiveLastTick", this.activeLastTick);
@@ -248,19 +246,19 @@ public class TileEntitySimpleController extends TileEntity implements ISidedInve
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
-		return side == 0 ? slots_bottom : (side == 1 ? slots_top : slots_sides);
+	public int[] getSlotsForFace(EnumFacing side) {
+		return side == EnumFacing.DOWN ? slots_bottom : (side == EnumFacing.UP ? slots_top : slots_sides);
 	}
 
 	@Override
-	public boolean canInsertItem(int i, ItemStack item, int side) {
-		return this.isItemValidForSlot(i, item);
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		return this.isItemValidForSlot(index, itemStackIn);
 	}
 
 	@Override
-	public boolean canExtractItem(int i, ItemStack item, int side) {
+	public boolean canExtractItem(int index, ItemStack itemStackIn, EnumFacing direction) {
 		// if extracts from down slot 1(fuel) than true
-		return side == 0 || i == 1;
+		return direction == EnumFacing.DOWN || index == 1;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -290,6 +288,43 @@ public class TileEntitySimpleController extends TileEntity implements ISidedInve
 
 	public void setDimensionEnergy(int dimensionEnergy) {
 		this.dimensionEnergy = dimensionEnergy;
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+        for (int i = 0; i < this.slots.length; ++i)
+        {
+            this.slots[i] = null;
+        }
+		
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory,EntityPlayer playerIn) {
+		return new ContainerFurnace(playerInventory, this);
+	}
+
+	@Override
+	public String getGuiID() {
+		return "dimensionshift:simpleController";
 	}
 
 }

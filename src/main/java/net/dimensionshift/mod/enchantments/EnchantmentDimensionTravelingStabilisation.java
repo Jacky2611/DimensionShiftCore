@@ -2,11 +2,12 @@ package net.dimensionshift.mod.enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.util.ResourceLocation;
 
 public class EnchantmentDimensionTravelingStabilisation extends Enchantment {
 
 	public EnchantmentDimensionTravelingStabilisation(int id, int rarity) {
-		super(id, rarity, EnumEnchantmentType.armor);
+		super(id, new ResourceLocation("unbreaking"), rarity, EnumEnchantmentType.ARMOR);
 		this.setName("dimensionTravelingStabilisation");
 	}
 

@@ -42,18 +42,19 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(modid = DimensionShift.MODID, name = "DimensionShift", version = DimensionShift.VERSION)
 public class DimensionShift {
@@ -141,23 +142,34 @@ public class DimensionShift {
 		// loading the configuration from its file
 		config.load();
 
+		
+		
+		
+		
 		// saving the configuration to its file
 		config.save();
 
+		
+		
 		// BLOCKS
 
+		/*
 		blockDummy = new BlockDummy(Material.ground, "blockDummy").setStepSound(Block.soundTypeStone).setResistance(10F);
 		GameRegistry.registerBlock(blockDummy, "blockDummy");
 
 		blockMachineBlock = new BasicBlock(Material.rock, "blockMachineBlock").setStepSound(Block.soundTypeMetal).setResistance(80F).setHardness(3F);
 		GameRegistry.registerBlock(blockMachineBlock, "blockMachineBlock");
 
-		blockSimpleControllerIdle = new BlockSimpleController(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setBlockName("blockSimpleController");
-		blockSimpleControllerActive = new BlockSimpleController(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setBlockName("blockSimpleControllerActive");
+		*/
+		
+		blockSimpleControllerIdle = new BlockSimpleController(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setUnlocalizedName("blockSimpleController");
+		blockSimpleControllerActive = new BlockSimpleController(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setUnlocalizedName("blockSimpleControllerActive");
 		GameRegistry.registerBlock(blockSimpleControllerIdle, "blockSimpleController");
 		GameRegistry.registerBlock(blockSimpleControllerActive, "blockSimpleControllerActive");
 		GameRegistry.registerTileEntity(TileEntitySimpleController.class, "tileEntitySimpleController");
 
+		
+		/*
 		blockSimpleTeleporterIdle = new BlockSimpleTeleporter(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setBlockName("blockSimpleTeleporter");
 		blockSimpleTeleporterActive = new BlockSimpleTeleporter(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setBlockName("blockSimpleTeleporterActive");
 		GameRegistry.registerBlock(blockSimpleTeleporterIdle, "blockSimpleTeleporter");
@@ -192,6 +204,10 @@ public class DimensionShift {
 
 		GameRegistry.registerTileEntity(TileEntityBasicWire.class, MODID + ":" + "BasicPipe");
 
+		*/
+
+
+
 		// ITEMS
 
 		itemEnderDust = new ItemDust(64, "itemEnderDust");
@@ -206,8 +222,12 @@ public class DimensionShift {
 		itemDimensionIdentificationCrystal = new ItemDimensionIdentificationCrystal(1, "itemDimensionIdentificationCrystal");
 		GameRegistry.registerItem(itemDimensionIdentificationCrystal, "itemDimensionIdentificationCrystal");
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		
+		
+		//NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
+		
+		
 		Iterator<Item> itItem = Item.itemRegistry.iterator();
 		while (itItem.hasNext()) {
 			Item itemFood = itItem.next();
@@ -226,7 +246,8 @@ public class DimensionShift {
 		// BIOMES
 
 		// CRAFTINGS
-
+		
+		/*
 		GameRegistry.addShapelessRecipe(new ItemStack(itemEnderDust), new ItemStack(Items.redstone, 2), new ItemStack(Items.ender_pearl, 2));
 
 		GameRegistry.addSmelting(itemEnderDust, new ItemStack(itemEnderCrystal, 1), 0.1f);
@@ -248,6 +269,8 @@ public class DimensionShift {
 		GameRegistry.addRecipe(new ItemStack(blockGlassJar), "xzx", "x x", "xxx",
 				'x', new ItemStack(Blocks.glass), 'z', new ItemStack(Blocks.wooden_slab));
 
+
+	*/
 		// POTIONS
 		Potion[] potionTypes = null;
 		/*

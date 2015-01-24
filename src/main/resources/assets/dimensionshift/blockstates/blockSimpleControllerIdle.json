@@ -1,0 +1,10 @@
+{
+    "variants": {
+    	"normal": { "model": "dimensionshift:blockSimpleControllerIdle" },
+    	"facing=north": { "model": "dimensionshift:blockSimpleControllerIdle" },
+    	"facing=south": { "model": "dimensionshift:blockSimpleControllerIdle", "y": 180 },
+    	"facing=west":  { "model": "dimensionshift:blockSimpleControllerIdle", "y": 270 },
+    	"facing=east":  { "model": "dimensionshift:blockSimpleControllerIdle", "y": 90 },
+	}
+
+}
