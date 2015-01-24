@@ -1,0 +1,16 @@
+[
+{
+  "modid": "dimensionshift",
+  "name": "DimensionShift",
+  "description": "A trans-dimension-travel-mod!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Jacky2611"],
+  "credits": "The Forge guys, Jacky2611 and everyone who helped me :D",
+  "logoFile": "/dimensionshift_logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

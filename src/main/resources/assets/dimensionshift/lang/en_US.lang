@@ -1,0 +1,30 @@
+itemGroup.tabDimensionshift=Dimension Shift Tab
+
+tile.blockMachineBlock.name=Machine Block
+tile.blockSunBlock.name=Sunlight Generator
+tile.blockSimpleController.name=Simple Dimension Controlling Unit
+tile.blockSimpleTeleporter.name=Simple Teleporter
+tile.blockTeleporter.name=Teleporter
+tile.blockGlassJar.name=Glass Jar
+tile.blockItemWasher.name=Item Washer
+
+
+tile.wireBasic.name=Dimension Power Wire
+
+item.itemEnderDust.name=Ender Dust
+item.itemEnderLense.name=Ender Lense
+item.itemEnderCrystal.name=Ender Crystal
+item.itemDimensionIdentificationCrystal.name=Dimension Identification Crystal
+item.itemDimensionIdentificationCrystal.desc.destination=Destination
+
+container.simpleController=Simple Controller
+container.simpleTeleporter=Simple Teleporter
+container.teleporter=Teleporter
+container.itemWasher=Item Washer
+
+
+
+achievement.enderDust=Getting started
+achievement.enderDust.desc=Look, it glitters!
+
+enchantment.dimensionTravelingStabilisation=Dimension Traveling Stabilisation
