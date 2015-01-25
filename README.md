@@ -1,5 +1,5 @@
 # DimensionShiftCore
-a mod by Jacky2611
+a test mod by Jacky2611
 
 
 Please also have a look at my DimensionShift addon: <a href="https://github.com/Jacky2611/DimensionShiftInfectus"> DimensionShiftInfectus</a>
