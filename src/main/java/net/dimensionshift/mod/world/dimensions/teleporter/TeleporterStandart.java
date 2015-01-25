@@ -4,11 +4,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class TeleporterStandart extends Teleporter {
 
@@ -21,17 +22,18 @@ public class TeleporterStandart extends Teleporter {
 		this.topBlock = topBlock;
 	}
 
-	@Override
+	
 	public void placeInPortal(Entity pEntity, double p2, double p3, double p4, float p5) {
 		int i = MathHelper.floor_double(pEntity.posX);
 		int j = MathHelper.floor_double(pEntity.posY);
 		int k = MathHelper.floor_double(pEntity.posZ);
-		this.worldServerInstance.getBlock(i, j, k); // dummy load to maybe gen
+		
+		this.worldServerInstance.getBlockState(new BlockPos(i, j, k)); // dummy load to maybe gen
 													// chunk
 
 		int height = 100;
 		if (topBlock) {
-			height = this.worldServerInstance.getHeightValue(i, k);// spawn
+			//height = this.worldServerInstance.(i, k);// spawn
 																	// player on
 																	// heighest
 																	// Block

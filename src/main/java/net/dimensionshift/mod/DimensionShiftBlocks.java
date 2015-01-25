@@ -64,8 +64,8 @@ public class DimensionShiftBlocks {
 
 		blockMachineBlock = new BasicBlock(Material.rock, "blockMachineBlock").setStepSound(Block.soundTypeMetal).setResistance(80F).setHardness(3F);
 		
-		blockSimpleControllerIdle = new BlockSimpleController(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setUnlocalizedName("blockSimpleController");
-		blockSimpleControllerActive = new BlockSimpleController(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setUnlocalizedName("blockSimpleControllerActive");
+		//blockSimpleControllerIdle = new BlockSimpleController(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setUnlocalizedName("blockSimpleController");
+		//blockSimpleControllerActive = new BlockSimpleController(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setUnlocalizedName("blockSimpleControllerActive");
 
 		/*
 		blockSimpleTeleporterIdle = new BlockSimpleTeleporter(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setUnlocalizedName("blockSimpleTeleporter");
@@ -94,9 +94,9 @@ public class DimensionShiftBlocks {
 		GameRegistry.registerBlock(blockMachineBlock, "blockMachineBlock");
 		
 		
-		GameRegistry.registerBlock(blockSimpleControllerIdle, "blockSimpleController");
-		GameRegistry.registerBlock(blockSimpleControllerActive, "blockSimpleControllerActive");
-		GameRegistry.registerTileEntity(TileEntitySimpleController.class, "tileEntitySimpleController");
+		//GameRegistry.registerBlock(blockSimpleControllerIdle, "blockSimpleController");
+		//GameRegistry.registerBlock(blockSimpleControllerActive, "blockSimpleControllerActive");
+		//GameRegistry.registerTileEntity(TileEntitySimpleController.class, "tileEntitySimpleController");
 
 		/*
 		
@@ -131,8 +131,8 @@ public class DimensionShiftBlocks {
 	{
 		registerRender(blockMachineBlock);
 		
-		registerRender(blockSimpleControllerIdle);
-		registerRender(blockSimpleControllerActive);
+		//registerRender(blockSimpleControllerIdle);
+		//registerRender(blockSimpleControllerActive);
 
 	}
 	
