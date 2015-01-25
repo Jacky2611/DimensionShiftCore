@@ -1,6 +1,7 @@
 package net.dimensionshift.mod;
 
 import java.util.Iterator;
+import java.util.logging.Level;
 
 import net.dimensionshift.mod.block.BasicBlock;
 import net.dimensionshift.mod.block.BlockAirDummy;
@@ -60,7 +61,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class DimensionShift {
 
 	public static final String MODID = "dimensionshift"; // setting MODID
-	public static final String VERSION = "Experimental v0.312"; // setting MODID
+	public static final String VERSION = "Experimental v0.500"; // setting MODID
 	@Instance(MODID)
 	public static DimensionShift instance;
 
@@ -81,38 +82,7 @@ public class DimensionShift {
 
 	};
 
-	// BLOCKS
-	public static Block blockDummy;
 
-	public static Block blockMachineBlock;
-
-	public static Block blockGlassJar;
-
-	public static Block blockSimpleControllerIdle;
-	public static Block blockSimpleControllerActive;
-
-	public static Block blockSimpleTeleporterIdle;
-	public static Block blockSimpleTeleporterActive;
-
-	public static Block blockTeleporterIdle;
-	public static Block blockTeleporterActive;
-
-	public static Block blockSunBlockIdle;
-	public static Block blockSunBlockActive;
-
-	public static Block blockInvisibleBlock;
-	public static Block blockAirDummy;
-
-	public static Block blockWireBasic;
-
-	// ITEMS
-	public static Item itemEnderDust;
-
-	public static Item itemEnderCrystal;
-
-	public static Item itemEnderLense;
-
-	public static Item itemDimensionIdentificationCrystal;
 
 	// GUI
 	public static final int guiIdSimpleController = 0;
@@ -137,6 +107,9 @@ public class DimensionShift {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
+		DimensionShiftLogHelper.init();
+		DimensionShiftLogHelper.log(Level.INFO, "Loading DimensionShift Version " + VERSION);
+		
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 
 		// loading the configuration from its file
@@ -152,78 +125,19 @@ public class DimensionShift {
 		
 		
 		// BLOCKS
-
-		/*
-		blockDummy = new BlockDummy(Material.ground, "blockDummy").setStepSound(Block.soundTypeStone).setResistance(10F);
-		GameRegistry.registerBlock(blockDummy, "blockDummy");
-
-		blockMachineBlock = new BasicBlock(Material.rock, "blockMachineBlock").setStepSound(Block.soundTypeMetal).setResistance(80F).setHardness(3F);
-		GameRegistry.registerBlock(blockMachineBlock, "blockMachineBlock");
-
-		*/
-		
-		blockSimpleControllerIdle = new BlockSimpleController(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setUnlocalizedName("blockSimpleController");
-		blockSimpleControllerActive = new BlockSimpleController(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setUnlocalizedName("blockSimpleControllerActive");
-		GameRegistry.registerBlock(blockSimpleControllerIdle, "blockSimpleController");
-		GameRegistry.registerBlock(blockSimpleControllerActive, "blockSimpleControllerActive");
-		GameRegistry.registerTileEntity(TileEntitySimpleController.class, "tileEntitySimpleController");
-
-		
-		/*
-		blockSimpleTeleporterIdle = new BlockSimpleTeleporter(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setBlockName("blockSimpleTeleporter");
-		blockSimpleTeleporterActive = new BlockSimpleTeleporter(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setBlockName("blockSimpleTeleporterActive");
-		GameRegistry.registerBlock(blockSimpleTeleporterIdle, "blockSimpleTeleporter");
-		GameRegistry.registerBlock(blockSimpleTeleporterActive, "blockSimpleTeleporterActive");
-		GameRegistry.registerTileEntity(TileEntitySimpleTeleporter.class, "tileEntitySimpleTeleporter");
-
-		blockTeleporterIdle = new BlockTeleporter(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setBlockName("blockTeleporter");
-		blockTeleporterActive = new BlockTeleporter(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setBlockName("blockTeleporterActive");
-		GameRegistry.registerBlock(blockTeleporterIdle, "blockTeleporter");
-		GameRegistry.registerBlock(blockTeleporterActive, "blockTeleporterActive");
-		GameRegistry.registerTileEntity(TileEntityTeleporter.class, "tileEntityTeleporter");
-
-		blockSunBlockIdle = new BlockSunBlock(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setBlockName("blockSunBlock");
-		blockSunBlockActive = new BlockSunBlock(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setBlockName("blockSunBlockActive");
-		GameRegistry.registerBlock(blockSunBlockIdle, "blockSunBlock");
-		GameRegistry.registerBlock(blockSunBlockActive, "blockSunBlockActive");
-
-		blockInvisibleBlock = new BlockInvisibleBlock(Material.rock);
-		GameRegistry.registerBlock(blockInvisibleBlock, "blockInvisibleBlock");
-		GameRegistry.registerTileEntity(TileEntityInvisibleBlock.class, "tileEntityStoneBricks");
-
-		blockAirDummy = new BlockAirDummy();
-		GameRegistry.registerBlock(blockAirDummy, "blockAirDummy");
-		GameRegistry.registerTileEntity(TileEntityAirDummy.class, "tileEntityAirDummy");
-
-		blockGlassJar = new BlockGlassJar(Material.glass).setStepSound(Block.soundTypeWood).setBlockName("blockGlassJar");
-		GameRegistry.registerBlock(blockGlassJar, CustomItemBlock.class, "blockGlassJar");
-		GameRegistry.registerTileEntity(TileEntityGlassJar.class, "tileEntityGlassJar");
-
-		blockWireBasic = new BlockWire().setBlockName("wireBasic");
-		GameRegistry.registerBlock(blockWireBasic, "wireBasic");
-
-		GameRegistry.registerTileEntity(TileEntityBasicWire.class, MODID + ":" + "BasicPipe");
-
-		*/
-
-
-
-		// ITEMS
-
-		itemEnderDust = new ItemDust(64, "itemEnderDust");
-		GameRegistry.registerItem(itemEnderDust, "itemEnderDust");
-
-		itemEnderLense = new ItemBasic(16, "itemEnderLense");
-		GameRegistry.registerItem(itemEnderLense, "itemEnderLense");
-
-		itemEnderCrystal = new ItemBasic(64, "itemEnderCrystal");
-		GameRegistry.registerItem(itemEnderCrystal, "itemEnderCrystal");
-
-		itemDimensionIdentificationCrystal = new ItemDimensionIdentificationCrystal(1, "itemDimensionIdentificationCrystal");
-		GameRegistry.registerItem(itemDimensionIdentificationCrystal, "itemDimensionIdentificationCrystal");
-
+		DimensionShiftBlocks.init();
+		DimensionShiftBlocks.register();
 		
 		
+		//ITEMS
+		//DimensionShiftItems.init();
+		//DimensionShiftItems.register();
+		
+		
+
+
+		
+
 		//NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
 		
@@ -288,14 +202,20 @@ public class DimensionShift {
 		 * System.err.println("Severe error, please report this to the mod author:"
 		 * ); System.err.println(e); } }
 		 */
+		
+
 
 	}
 
 	@EventHandler
 	public void Init(FMLInitializationEvent e) {
 
+		//renders Block and Items textures
+		proxy.registerRenders();
+		DimensionShiftLogHelper.log(Level.FINE, "After registerRenders");
+		
 		// ACHIEVEMNET
-		achievementEnderDust = new Achievement("achievementEnderDust", "enderDust", 0, 0, DimensionShift.itemEnderDust, null);
+		achievementEnderDust = new Achievement("achievementEnderDust", "enderDust", 0, 0, Items.ender_eye, null);
 
 		// ACHIEVMENET PAGE
 		achievementPageDimensionShift = new AchievementPage("Dimension Shift", achievementEnderDust);
@@ -305,12 +225,14 @@ public class DimensionShift {
 
 	@EventHandler
 	public void PostInit(FMLPostInitializationEvent e) {
+
+		
 		proxy.registerProxies();
 
 		// EVENT HANDLER
 		MinecraftForge.EVENT_BUS.register(new EventHandlerDimensionShift());
 		FMLCommonHandler.instance().bus().register(new EventHandlerDimensionShift());
-
+		
 	}
 
 }

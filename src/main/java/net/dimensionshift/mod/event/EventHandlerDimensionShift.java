@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.dimensionshift.mod.DimensionShift;
+import net.dimensionshift.mod.DimensionShiftItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -23,12 +24,12 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 
 public class EventHandlerDimensionShift {
 
@@ -41,7 +42,7 @@ public class EventHandlerDimensionShift {
 			EntityPlayer player = (EntityPlayer) event.entity;
 
 			// triggering ender dust achievement if he has the item ender Dust
-			if (player.inventory.hasItem(DimensionShift.itemEnderDust)) {
+			if (player.inventory.hasItem(DimensionShiftItems.itemEnderDust)) {
 				player.addStat(DimensionShift.achievementEnderDust, 1);
 			}
 

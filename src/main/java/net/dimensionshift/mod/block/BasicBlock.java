@@ -8,8 +8,7 @@ public class BasicBlock extends Block {
 
 	public BasicBlock(Material material, String name) {
 		super(material);
-		this.setBlockName(name);
-		this.textureName = DimensionShift.MODID + ":" + name;
+		this.setUnlocalizedName(name);
 		this.setCreativeTab(DimensionShift.tabDimensionShift);
 	}
 

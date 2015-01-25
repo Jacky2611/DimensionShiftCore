@@ -15,10 +15,9 @@ public class ItemDust extends Item {
 		setMaxStackSize(maxStackSize);
 		setCreativeTab(DimensionShift.tabDimensionShift);
 		setUnlocalizedName(name);
-		setTextureName(DimensionShift.MODID + ":" + name);
 
 	}
-
+	/*
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int side, float px, float py, float pz) {
 		System.out.println("ON ITEM USE");
@@ -37,5 +36,6 @@ public class ItemDust extends Item {
 
 		return true;
 	}
+	*/
 
 }
