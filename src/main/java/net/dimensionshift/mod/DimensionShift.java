@@ -1,7 +1,9 @@
 package net.dimensionshift.mod;
 
 import java.util.Iterator;
-import java.util.logging.Level;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import net.dimensionshift.mod.block.BasicBlock;
 import net.dimensionshift.mod.block.BlockAirDummy;
@@ -68,6 +70,10 @@ public class DimensionShift {
 	@SidedProxy(clientSide = "net.dimensionshift.mod.proxies.DimensionShiftClientProxy", serverSide = "net.dimensionshift.mod.proxies.DimensionShiftCommonProxy")
 	public static DimensionShiftCommonProxy proxy;
 
+	public static final Logger logger = LogManager.getLogger("DimensionShift");
+	
+	
+	
 	public static CreativeTabs tabDimensionShift = new CreativeTabs("tabDimensionShift") {
 		@Override
 		@SideOnly(Side.CLIENT)
@@ -107,8 +113,8 @@ public class DimensionShift {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 
-		DimensionShiftLogHelper.init();
-		DimensionShiftLogHelper.log(Level.INFO, "Loading DimensionShift Version " + VERSION);
+	
+		logger.info("PREINIT");
 		
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 
@@ -212,7 +218,8 @@ public class DimensionShift {
 
 		//renders Block and Items textures
 		proxy.registerRenders();
-		DimensionShiftLogHelper.log(Level.FINE, "After registerRenders");
+
+		logger.info("Registered Renders");
 		
 		// ACHIEVEMNET
 		achievementEnderDust = new Achievement("achievementEnderDust", "enderDust", 0, 0, Items.ender_eye, null);

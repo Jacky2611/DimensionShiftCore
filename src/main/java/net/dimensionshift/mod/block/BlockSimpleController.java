@@ -3,6 +3,7 @@ package net.dimensionshift.mod.block;
 import java.util.Random;
 
 import net.dimensionshift.mod.DimensionShift;
+import net.dimensionshift.mod.DimensionShiftBlocks;
 import net.dimensionshift.mod.blockplacing.TeleportSimpleController;
 import net.dimensionshift.mod.tileentity.TileEntitySimpleController;
 import net.minecraft.block.Block;
@@ -23,7 +24,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -69,7 +69,7 @@ public class BlockSimpleController extends BlockContainer {
 	// always dropping not active version
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(DimensionShift.blockSimpleControllerIdle);
+		return Item.getItemFromBlock(DimensionShiftBlocks.blockSimpleControllerIdle);
 
 	}
 
@@ -85,9 +85,9 @@ public class BlockSimpleController extends BlockContainer {
 		if (!keepInventory) {// if block is not broken by update status function
 	            TileEntity tileentity = worldIn.getTileEntity(pos);
 
-	            if (tileentity instanceof TileEntityFurnace)
+	            if (tileentity instanceof TileEntitySimpleController)
 	            {
-	                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityFurnace)tileentity);
+	                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntitySimpleController)tileentity);
 	                worldIn.updateComparatorOutputLevel(pos, this);
 	            }
 	        }

@@ -64,10 +64,10 @@ public class DimensionShiftBlocks {
 
 		blockMachineBlock = new BasicBlock(Material.rock, "blockMachineBlock").setStepSound(Block.soundTypeMetal).setResistance(80F).setHardness(3F);
 		
-		/*
 		blockSimpleControllerIdle = new BlockSimpleController(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setUnlocalizedName("blockSimpleController");
 		blockSimpleControllerActive = new BlockSimpleController(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setUnlocalizedName("blockSimpleControllerActive");
 
+		/*
 		blockSimpleTeleporterIdle = new BlockSimpleTeleporter(false).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setCreativeTab(DimensionShift.tabDimensionShift).setUnlocalizedName("blockSimpleTeleporter");
 		blockSimpleTeleporterActive = new BlockSimpleTeleporter(true).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setLightLevel(0.7F).setUnlocalizedName("blockSimpleTeleporterActive");
 
@@ -93,11 +93,13 @@ public class DimensionShiftBlocks {
 
 		GameRegistry.registerBlock(blockMachineBlock, "blockMachineBlock");
 		
-		/*
+		
 		GameRegistry.registerBlock(blockSimpleControllerIdle, "blockSimpleController");
 		GameRegistry.registerBlock(blockSimpleControllerActive, "blockSimpleControllerActive");
 		GameRegistry.registerTileEntity(TileEntitySimpleController.class, "tileEntitySimpleController");
 
+		/*
+		
 		GameRegistry.registerBlock(blockSimpleTeleporterIdle, "blockSimpleTeleporter");
 		GameRegistry.registerBlock(blockSimpleTeleporterActive, "blockSimpleTeleporterActive");
 		GameRegistry.registerTileEntity(TileEntitySimpleTeleporter.class, "tileEntitySimpleTeleporter");
@@ -128,6 +130,10 @@ public class DimensionShiftBlocks {
 	public static void registerRenders()
 	{
 		registerRender(blockMachineBlock);
+		
+		registerRender(blockSimpleControllerIdle);
+		registerRender(blockSimpleControllerActive);
+
 	}
 	
 	public static void registerRender(Block block)
